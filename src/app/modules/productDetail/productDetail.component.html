@@ -1,0 +1,22 @@
+<div class="product-detail-container" *ngIf="product">
+  <div class="product-detail-card bg-base-100 shadow-xl">
+    <figure>
+      <img *ngIf="ImageList.length > 0" [src]="ImageList[0].value" alt="product" class="w-full h-64 object-cover" />
+    </figure>
+    <div class="flex justify-center mt-2 space-x-2">
+      <ng-container *ngIf="ImageList.length > 1">
+        <img *ngFor="let img of ImageList.slice(1)" [src]="img.value" alt="product-thumbnail" class="w-16 h-16 object-cover border border-gray-300" />
+      </ng-container>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title text-white">{{product?.productName}}</h2>
+      <p class="font-bold text-white">{{product?.productDesc}}</p>
+      <p class="font-bold text-white">ราคา : {{product?.productPrice}}</p>
+      <p class="font-bold text-white">จำนวน : {{product?.productStock}}</p>
+      <p class="font-bold text-white">ประเภท : {{product?.productTypeName}}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>

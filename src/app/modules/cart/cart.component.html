@@ -1,0 +1,24 @@
+<div class="min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg text-white p-4">
+  <div class="container mx-auto bg-black bg-opacity-70 rounded-lg shadow-lg p-6">
+    <h2 class="text-3xl font-extrabold mb-6">Shopping Cart</h2>
+    <div *ngIf="cart.length === 0" class="text-center">
+      <p class="text-lg">Your cart is empty.</p>
+    </div>
+    <div *ngIf="cart.length > 0" class="grid grid-cols-1 gap-6">
+      <div *ngFor="let item of cart" class="bg-gray-800 rounded-lg shadow-md p-4 flex items-center">
+        <img [src]="item.imgList.length > 0 ? item.imgList[0].value : 'assets/default-image.jpg'" alt="product"
+          class="w-24 h-24 object-cover rounded-lg" />
+        <div class="flex-1 ml-4">
+          <h3 class="text-2xl font-semibold text-white">{{ item.productName }}</h3>
+          <p class="text-gray-300">{{ item.productDesc }}</p>
+          <p class="text-gray-300">Price: {{ item.productPrice }}</p>
+          <p class="text-gray-300">Quantity: {{ item.quantity }}</p>
+          <button (click)="removeFromCart(item)" class="btn btn-error mt-2">Remove</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="cart.length > 0" class="mt-6 flex justify-end">
+      <button class="btn btn-primary">Checkout</button>
+    </div>
+  </div>
+</div>

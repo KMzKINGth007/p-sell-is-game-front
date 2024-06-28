@@ -1,0 +1,25 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
+  <div *ngFor="let product of productList" (click)="OnGetProductById(product.productId)"
+    class="card card-compact bg-base-100 shadow-xl cursor-pointer transition-transform transform hover:scale-105">
+    <figure>
+      <img *ngIf="product.imgList.length > 0" [src]="product.imgList[0].value" alt="product"
+        class="w-full h-64 object-cover" />
+    </figure>
+    <div class="flex justify-center mt-2 space-x-2">
+      <ng-container *ngIf="product.imgList.length > 1">
+        <img *ngFor="let img of product.imgList.slice(1, 4)" [src]="img.value" alt="product-thumbnail"
+          class="w-16 h-16 object-cover border border-gray-300" />
+      </ng-container>
+    </div>
+    <div class="card-body">
+      <h2 class="card-title text-white">{{product.productName}}</h2>
+      <p class="font-bold text-white">{{product.productDesc}}</p>
+      <p class="font-bold text-white">ราคา : {{product.productPrice}}</p>
+      <p class="font-bold text-white">จำนวน : {{product.productStock}}</p>
+      <p class="font-bold text-white">ประเภท : {{product.productType[0].productTypeName}}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary" (click)="addToCart(product, $event)">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</div>
