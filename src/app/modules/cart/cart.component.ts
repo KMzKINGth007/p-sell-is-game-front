@@ -11,6 +11,7 @@ export class CartComponent implements OnInit {
   cart: any[] = [];
   userDetail: any;
   imageBlobUrl: SafeResourceUrl;
+  itemToRemove: any = null;
 
   constructor(private callService: CallserviceService, private sanitizer: DomSanitizer) {}
 
@@ -33,8 +34,30 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeFromCart(product: any) {
-    this.cart = this.cart.filter(item => item.productId !== product.productId);
+  confirmRemove(product: any) {
+    this.itemToRemove = product;
+  }
+
+  cancelRemove() {
+    this.itemToRemove = null;
+  }
+
+  removeFromCartConfirmed() {
+    this.cart = this.cart.filter(item => item.productId !== this.itemToRemove.productId);
+    this.updateCart();
+    this.itemToRemove = null;
+  }
+
+  updateQuantity(product: any, change: number) {
+    product.quantity += change;
+    if (product.quantity <= 0) {
+      this.confirmRemove(product);
+    } else {
+      this.updateCart();
+    }
+  }
+
+  updateCart() {
     sessionStorage.setItem(this.userDetail.userId + 'cart', JSON.stringify(this.cart));
   }
 
