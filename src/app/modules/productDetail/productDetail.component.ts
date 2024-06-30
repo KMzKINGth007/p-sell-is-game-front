@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CallserviceService } from '../services/callservice.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productDetail',
@@ -69,6 +70,42 @@ export class ProductDetailComponent implements OnInit {
         key: fileNames,
         value: this.imageBlobUrl
       });
+    });
+  }
+
+  addToCart(product: any) {
+    let userDetail = JSON.parse(sessionStorage.getItem('userDetail') || '{}');
+    if (!userDetail.userId) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'กรุณาเข้าสู่ระบบ',
+        text: 'Please log in to add items to the cart.',
+        toast: true,
+        position: 'bottom-right',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+      return;
+    }
+
+    let cart = JSON.parse(sessionStorage.getItem(userDetail.userId + 'cart') || '[]');
+    let item = cart.find((item: any) => item.productId === product.productId && item.userId === userDetail.userId);
+    if (item) {
+      item.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1, userId: userDetail.userId });
+    }
+    sessionStorage.setItem(userDetail.userId + 'cart', JSON.stringify(cart));
+
+    Swal.fire({
+      icon: 'success',
+      title: 'เพิ่มสินค้าลงตะกร้าเรียบร้อยแล้ว',
+      toast: true,
+      position: 'bottom-right',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
     });
   }
 }

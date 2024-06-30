@@ -8,15 +8,15 @@
     <div class="flex justify-center mt-2 space-x-2">
       <ng-container *ngIf="product.imgList.length > 1">
         <img *ngFor="let img of product.imgList.slice(1, 4)" [src]="img.value" alt="product-thumbnail"
-          class="w-16 h-16 object-cover border border-gray-300" />
+          class="w-16 h-16 object-cover border border-gray-300 rounded-md" />
       </ng-container>
     </div>
     <div class="card-body">
       <h2 class="card-title text-white">{{product.productName}}</h2>
       <p class="font-bold text-white">{{product.productDesc}}</p>
-      <p class="font-bold text-white">ราคา : {{product.productPrice}}</p>
-      <p class="font-bold text-white">จำนวน : {{product.productStock}}</p>
-      <p class="font-bold text-white">ประเภท : {{product.productType[0].productTypeName}}</p>
+      <p class="font-bold text-white">ราคา: {{product.productPrice}}</p>
+      <p class="font-bold text-white">จำนวน: {{product.productStock}}</p>
+      <p class="font-bold text-white">ประเภท: {{product.productType[0].productTypeName}}</p>
       <div class="card-actions justify-end">
         <button class="btn btn-primary" (click)="addToCart(product, $event)">Buy Now</button>
       </div>

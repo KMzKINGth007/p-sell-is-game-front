@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CallserviceService } from '../services/callservice.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -84,10 +85,19 @@ export class HomeComponent implements OnInit {
     event.stopPropagation();
     let userDetail = JSON.parse(sessionStorage.getItem('userDetail') || '{}');
     if (!userDetail.userId) {
-      alert('Please log in to add items to the cart.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'กรุณาเข้าสู่ระบบ',
+        text: 'Please log in to add items to the cart.',
+        toast: true,
+        position: 'bottom-right',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
       return;
     }
-
+  
     let cart = JSON.parse(sessionStorage.getItem(userDetail.userId + 'cart') || '[]');
     let item = cart.find((item: any) => item.productId === product.productId && item.userId === userDetail.userId);
     if (item) {
@@ -96,6 +106,17 @@ export class HomeComponent implements OnInit {
       cart.push({ ...product, quantity: 1, userId: userDetail.userId });
     }
     sessionStorage.setItem(userDetail.userId + 'cart', JSON.stringify(cart));
-    alert('Product added to cart!');
+  
+    Swal.fire({
+      icon: 'success',
+      title: 'เพิ่มสินค้าลงตะกร้าเรียบร้อยแล้ว',
+      toast: true,
+      position: 'bottom-right',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+    });
   }
+  
+  
 }

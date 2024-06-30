@@ -15,7 +15,7 @@
       <p class="font-bold text-white">จำนวน : {{product?.productStock}}</p>
       <p class="font-bold text-white">ประเภท : {{product?.productTypeName}}</p>
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">Buy Now</button>
+        <button class="btn btn-primary" (click)="addToCart(product)">Buy Now</button>
       </div>
     </div>
   </div>
