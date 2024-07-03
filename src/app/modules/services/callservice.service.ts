@@ -111,6 +111,10 @@ export class CallserviceService {
     return this.http.delete(API_ENDPOINT.concat('/product/deleteImgByFileName?fileName='+ fileName));
   }
 
+  placeOrder(orderDetails: any): Observable<any> {
+    return this.http.post<any>(`${API_ENDPOINT}/order/addOrder`, orderDetails, httpOptions);
+  }
+
 }
 
 

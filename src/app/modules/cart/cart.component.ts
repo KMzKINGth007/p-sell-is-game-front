@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CallserviceService } from '../services/callservice.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
   imageBlobUrl: SafeResourceUrl;
   itemToRemove: any = null;
 
-  constructor(private callService: CallserviceService, private sanitizer: DomSanitizer) {}
+  constructor(private callService: CallserviceService, private sanitizer: DomSanitizer, private router: Router) {}
 
   ngOnInit() {
     this.userDetail = JSON.parse(sessionStorage.getItem('userDetail') || '{}');
@@ -72,5 +73,9 @@ export class CartComponent implements OnInit {
         });
       }
     });
+  }
+
+  checkout() {
+    this.router.navigate(['/createOrder'], { state: { cart: this.cart, userDetail: this.userDetail } });
   }
 }

@@ -21,6 +21,7 @@ import { ProductDetailComponent } from 'src/app/modules/productDetail/productDet
 import { OrderAdminComponent } from 'src/app/modules/orderAdmin/orderAdmin.component';
 import { ProfileEditComponent } from 'src/app/modules/profileEdit/profileEdit.component';
 import { CartComponent } from 'src/app/modules/cart/cart.component';
+import { CreateOrderComponent } from 'src/app/modules/createOrder/createOrder.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { CartComponent } from 'src/app/modules/cart/cart.component';
     ProductDetailComponent,
     OrderAdminComponent,
     ProfileEditComponent,
-    CartComponent
+    CartComponent,
+    CreateOrderComponent
   ]
 })
 export class FullwidthModule { }
