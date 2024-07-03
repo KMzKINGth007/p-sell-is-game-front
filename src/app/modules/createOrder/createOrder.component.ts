@@ -10,6 +10,7 @@ import { CallserviceService } from '../services/callservice.service';
 export class CreateOrderComponent implements OnInit {
   cart: any[] = [];
   userDetail: any;
+  selectedPaymentMethod: number;
 
   constructor(private router: Router, private callService: CallserviceService) {
     const navigation = this.router.getCurrentNavigation();
@@ -25,10 +26,15 @@ export class CreateOrderComponent implements OnInit {
   }
 
   placeOrder() {
+    if (!this.selectedPaymentMethod) {
+      alert('Please select a payment method');
+      return;
+    }
+
     const orderDetails = {
       userDetailId: this.userDetail.userId,
-      paymentId: 1, // Assuming a static payment ID for this example
-      totalAmount: this.cart.reduce((total, item) => total + (item.productPrice * item.quantity), 0),
+      paymentId: this.selectedPaymentMethod,
+      totalAmount: this.cart.reduce((sum, item) => sum + (item.productPrice * item.quantity), 0),
       items: this.cart.map(item => ({
         productId: item.productId,
         quantity: item.quantity,
@@ -37,12 +43,17 @@ export class CreateOrderComponent implements OnInit {
     };
 
     this.callService.placeOrder(orderDetails).subscribe(
-      (response) => {
-        alert('Order placed successfully!');
-        this.router.navigate(['/']);
+      response => {
+        if (response.status === 'SUCCESS') {
+          alert('Order placed successfully');
+          // Navigate to order confirmation page or homepage
+          this.router.navigate(['/']);
+        } else {
+          alert('Error placing order: ' + response.message);
+        }
       },
-      (error) => {
-        console.error('Error placing order', error);
+      error => {
+        alert('Error placing order: ' + error.message);
       }
     );
   }

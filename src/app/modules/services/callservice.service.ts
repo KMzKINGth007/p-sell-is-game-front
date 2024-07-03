@@ -112,7 +112,7 @@ export class CallserviceService {
   }
 
   placeOrder(orderDetails: any): Observable<any> {
-    return this.http.post<any>(`${API_ENDPOINT}/order/addOrder`, orderDetails, httpOptions);
+    return this.http.post<any>(API_ENDPOINT.concat('/order/addOrder'), orderDetails, httpOptions);
   }
 
 }
