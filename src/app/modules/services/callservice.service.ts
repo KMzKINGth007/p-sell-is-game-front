@@ -115,9 +115,8 @@ export class CallserviceService {
     return this.http.post<any>(API_ENDPOINT.concat('/order/addOrder'), orderDetails, httpOptions);
   }
 
+  getAllOrders(): Observable<any> {
+    return this.http.get(API_ENDPOINT.concat('/order/getAllOrders'));
+  }
+
 }
-
-
-
-
-

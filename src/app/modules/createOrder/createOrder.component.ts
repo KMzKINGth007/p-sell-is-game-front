@@ -12,7 +12,10 @@ export class CreateOrderComponent implements OnInit {
   userDetail: any;
   selectedPaymentMethod: number;
 
-  constructor(private router: Router, private callService: CallserviceService) {
+  constructor(
+    private router: Router, 
+    private callService: CallserviceService
+  ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as { cart: any[], userDetail: any };
     this.cart = state.cart;
@@ -35,6 +38,7 @@ export class CreateOrderComponent implements OnInit {
       userDetailId: this.userDetail.userId,
       paymentId: this.selectedPaymentMethod,
       totalAmount: this.cart.reduce((sum, item) => sum + (item.productPrice * item.quantity), 0),
+      status: "unpaid",
       items: this.cart.map(item => ({
         productId: item.productId,
         quantity: item.quantity,
@@ -46,7 +50,7 @@ export class CreateOrderComponent implements OnInit {
       response => {
         if (response.status === 'SUCCESS') {
           alert('Order placed successfully');
-          // Navigate to order confirmation page or homepage
+
           this.router.navigate(['/']);
         } else {
           alert('Error placing order: ' + response.message);

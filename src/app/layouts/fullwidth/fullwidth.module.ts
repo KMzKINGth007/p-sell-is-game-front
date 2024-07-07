@@ -50,7 +50,7 @@ import { CreateOrderComponent } from 'src/app/modules/createOrder/createOrder.co
     OrderAdminComponent,
     ProfileEditComponent,
     CartComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
   ]
 })
 export class FullwidthModule { }
