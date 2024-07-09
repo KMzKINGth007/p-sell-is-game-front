@@ -17,6 +17,7 @@ import { OrderAdminComponent } from './modules/orderAdmin/orderAdmin.component';
 import { ProfileEditComponent } from './modules/profileEdit/profileEdit.component';
 import { CartComponent } from './modules/cart/cart.component';
 import { CreateOrderComponent } from './modules/createOrder/createOrder.component';
+import { OrderDetailAdminComponent } from './modules/orderDetailAdmin/orderDetailAdmin.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,9 @@ const routes: Routes = [
     },{
       path: 'createOrder',
       component: CreateOrderComponent
+    },{
+      path: 'orderDetailAdmin/:orderId',
+      component: OrderDetailAdminComponent
     }]
   }
 ];

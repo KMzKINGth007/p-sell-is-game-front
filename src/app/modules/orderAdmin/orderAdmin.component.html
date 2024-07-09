@@ -42,8 +42,8 @@
                     <span class="text-secondary text-xs font-weight-bold">{{ order.status }}</span>
                   </td>
                   <td class="align-middle text-center">
-                    <button class="btn btn-warning" (click)="(order.orderId)">View</button>
-                    <button class="btn btn-danger" (click)="(order.orderId)">Delete</button>
+                    <button class="btn btn-primary" (click)="viewOrder(order)">View</button>
+                    <button class="btn btn-danger" (click)="deleteOrder(order.orderId)">Delete</button>
                   </td>
                 </tr>
               </tbody>

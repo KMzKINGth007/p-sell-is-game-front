@@ -119,4 +119,12 @@ export class CallserviceService {
     return this.http.get(API_ENDPOINT.concat('/order/getAllOrders'));
   }
 
+  getOrderDetails(orderId: number): Observable<any> {
+    return this.http.get(API_ENDPOINT.concat('/order/getOrderDetails/' + orderId));
+  }
+
+  deleteOrder(orderId: number): Observable<any> {
+    return this.http.delete(API_ENDPOINT.concat('/order/deleteOrder/' + orderId), httpOptions);
+  }
+
 }
