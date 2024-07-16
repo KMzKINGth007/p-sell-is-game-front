@@ -23,6 +23,7 @@ export class OrderAdminComponent implements OnInit {
     this.callService.getAllOrders().subscribe(
       (response) => {
         this.orders = response.data;
+        console.log(this.orders);
       },
       (error) => {
         console.error('Error fetching orders:', error);

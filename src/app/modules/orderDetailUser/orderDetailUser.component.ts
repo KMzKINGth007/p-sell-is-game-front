@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CallserviceService } from '../services/callservice.service';
 import { DomSanitizer } from '@angular/platform-browser';
-
 @Component({
-  selector: 'app-order-detail-admin',
-  templateUrl: './orderDetailAdmin.component.html',
-  styleUrls: ['./orderDetailAdmin.component.css']
+  selector: 'app-orderDetailUser',
+  templateUrl: './orderDetailUser.component.html',
+  styleUrls: ['./orderDetailUser.component.css']
 })
-export class OrderDetailAdminComponent implements OnInit {
+export class OrderDetailUserComponent implements OnInit {
   order: any = {};
   orderId: number | null = null;
   productImgList: any[] = [];

@@ -23,6 +23,8 @@ import { ProfileEditComponent } from 'src/app/modules/profileEdit/profileEdit.co
 import { CartComponent } from 'src/app/modules/cart/cart.component';
 import { CreateOrderComponent } from 'src/app/modules/createOrder/createOrder.component';
 import { OrderDetailAdminComponent } from 'src/app/modules/orderDetailAdmin/orderDetailAdmin.component';
+import { OrderUserComponent } from 'src/app/modules/orderUser/orderUser.component';
+import { OrderDetailUserComponent } from 'src/app/modules/orderDetailUser/orderDetailUser.component';
 
 @NgModule({
   imports: [
@@ -52,7 +54,9 @@ import { OrderDetailAdminComponent } from 'src/app/modules/orderDetailAdmin/orde
     ProfileEditComponent,
     CartComponent,
     CreateOrderComponent,
-    OrderDetailAdminComponent
+    OrderDetailAdminComponent,
+    OrderUserComponent,
+    OrderDetailUserComponent
   ]
 })
 export class FullwidthModule { }

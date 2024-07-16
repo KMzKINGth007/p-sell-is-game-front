@@ -31,6 +31,8 @@ export class ProfileEditComponent implements OnInit {
     age: '',
     roleId: '',
     userName: '',
+    email: '',
+    line: '',
   });
 
   ngOnInit() {

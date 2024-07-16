@@ -18,6 +18,8 @@ import { ProfileEditComponent } from './modules/profileEdit/profileEdit.componen
 import { CartComponent } from './modules/cart/cart.component';
 import { CreateOrderComponent } from './modules/createOrder/createOrder.component';
 import { OrderDetailAdminComponent } from './modules/orderDetailAdmin/orderDetailAdmin.component';
+import { OrderUserComponent } from './modules/orderUser/orderUser.component';
+import { OrderDetailUserComponent } from './modules/orderDetailUser/orderDetailUser.component';
 
 
 const routes: Routes = [
@@ -75,7 +77,17 @@ const routes: Routes = [
     },{
       path: 'orderDetailAdmin/:orderId',
       component: OrderDetailAdminComponent
-    }]
+    },{
+      path: 'order-user',
+      component: OrderUserComponent
+    },{
+      path: 'orderDetailUser/:orderId',
+      component: OrderDetailUserComponent
+    },{
+      path: 'orderDetailUser/:orderId',
+      component: OrderDetailUserComponent
+    }
+  ]
   }
 ];
 
