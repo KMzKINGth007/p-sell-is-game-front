@@ -21,9 +21,17 @@ export class HomeComponent implements OnInit {
   productImgList: any;
   productList: any;
   productTypeList: any = [];
-  
+  filteredProductList: any = [];
+  loading: boolean = false;
+  searchText: string = '';
+
   ngOnInit() {
     this.getProductTypeAll();
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.loading = true;
     this.callService.getAllProduct().subscribe((res) => {
       if (res.data) {
         this.productList = res.data;
@@ -51,7 +59,9 @@ export class HomeComponent implements OnInit {
               }
             });
         }
+        this.filteredProductList = this.productList;
       }
+      this.loading = false;
     });
   }
 
@@ -97,16 +107,22 @@ export class HomeComponent implements OnInit {
       });
       return;
     }
-  
-    let cart = JSON.parse(sessionStorage.getItem(userDetail.userId + 'cart') || '[]');
-    let item = cart.find((item: any) => item.productId === product.productId && item.userId === userDetail.userId);
+
+    let cart = JSON.parse(
+      sessionStorage.getItem(userDetail.userId + 'cart') || '[]'
+    );
+    let item = cart.find(
+      (item: any) =>
+        item.productId === product.productId &&
+        item.userId === userDetail.userId
+    );
     if (item) {
       item.quantity += 1;
     } else {
       cart.push({ ...product, quantity: 1, userId: userDetail.userId });
     }
     sessionStorage.setItem(userDetail.userId + 'cart', JSON.stringify(cart));
-  
+
     Swal.fire({
       icon: 'success',
       title: 'เพิ่มสินค้าลงตะกร้าเรียบร้อยแล้ว',
@@ -117,6 +133,26 @@ export class HomeComponent implements OnInit {
       showConfirmButton: false,
     });
   }
-  
-  
+
+  filterProducts(productTypeId: any) {
+    if (productTypeId === 'all') {
+      this.filteredProductList = this.productList;
+    } else {
+      this.filteredProductList = this.productList.filter(
+        (product: any) => product.productTypeId === productTypeId
+      );
+    }
+  }
+
+  filterProductsByText() {
+    if (this.searchText.trim() === '') {
+      this.filteredProductList = this.productList;
+    } else {
+      this.filteredProductList = this.productList.filter((product: any) =>
+        product.productName
+          .toLowerCase()
+          .includes(this.searchText.trim().toLowerCase())
+      );
+    }
+  }
 }

@@ -23,6 +23,8 @@ export class ProductDetailComponent implements OnInit {
   productImgList: any;
   ImageList: any = [];
   imageBlobUrl: any;
+  productTypeName: string = '';
+  quantity: number = 1; // Default quantity
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -34,6 +36,7 @@ export class ProductDetailComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
+    this.getProductType();
   }
 
   getProductDetails() {
@@ -92,9 +95,9 @@ export class ProductDetailComponent implements OnInit {
     let cart = JSON.parse(sessionStorage.getItem(userDetail.userId + 'cart') || '[]');
     let item = cart.find((item: any) => item.productId === product.productId && item.userId === userDetail.userId);
     if (item) {
-      item.quantity += 1;
+      item.quantity += this.quantity; // Add the selected quantity
     } else {
-      cart.push({ ...product, quantity: 1, userId: userDetail.userId });
+      cart.push({ ...product, quantity: this.quantity, userId: userDetail.userId });
     }
     sessionStorage.setItem(userDetail.userId + 'cart', JSON.stringify(cart));
 
@@ -106,6 +109,25 @@ export class ProductDetailComponent implements OnInit {
       timer: 3000,
       timerProgressBar: true,
       showConfirmButton: false,
+    });
+  }
+
+  increaseQuantity() {
+    this.quantity++;
+  }
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  getProductType() {
+    this.callService.getProductTypeAll().subscribe((res) => {
+      if (res.data) {
+        const productType = res.data.find((type: any) => type.productTypeId === this.product.productTypeId);
+        this.productTypeName = productType ? productType.productTypeName : '';
+      }
     });
   }
 }
