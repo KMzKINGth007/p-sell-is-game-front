@@ -13,7 +13,7 @@ export class CreateOrderComponent implements OnInit {
   selectedPaymentMethod: number;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private callService: CallserviceService
   ) {
     const navigation = this.router.getCurrentNavigation();
@@ -51,7 +51,10 @@ export class CreateOrderComponent implements OnInit {
         if (response.status === 'SUCCESS') {
           alert('Order placed successfully');
 
-          this.router.navigate(['/']);
+          // Clear the cart from session storage
+          sessionStorage.removeItem(this.userDetail.userId + 'cart');
+
+          this.router.navigate(['order-user']);
         } else {
           alert('Error placing order: ' + response.message);
         }

@@ -1,0 +1,29 @@
+<div class="min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg text-white p-4">
+  <div class="container mx-auto bg-black bg-opacity-70 rounded-lg shadow-lg p-6">
+    <h2 class="text-3xl font-extrabold mb-6">Payment</h2>
+    <div *ngIf="order">
+      <div class="p-4 bg-gray-800 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-2">Order Information</h3>
+        <p>Order ID: {{ order.orderId }}</p>
+        <p>User ID: {{ order.userDetailId }}</p>
+        <p>Total Amount: {{ order.totalAmount | currency }}</p>
+        <!-- Add other details if needed -->
+      </div>
+
+      <div class="text-center mt-6">
+        <h3 class="text-xl font-semibold mb-2">ชำระเงินผ่าน PromptPay</h3>
+        <div *ngIf="qrcodelink">
+          <img [src]="qrcodelink" alt="QR Code" class="w-32 h-32 mx-auto" />
+          <p>โปรดสแกน QR Code เพื่อชำระเงิน</p>
+        </div>
+      </div>
+
+      <!-- Add your payment form or button here -->
+      <div class="text-center mt-6">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          Confirm Payment
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

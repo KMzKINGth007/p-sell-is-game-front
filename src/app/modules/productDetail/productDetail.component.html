@@ -1,7 +1,86 @@
-<div class="product-detail-container min-h-screen" *ngIf="product">
+<div class="product-detail-container min-h-screen bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg pt-2" *ngIf="product">
+  <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden text-white mx-2">
+    <div class="flex flex-col md:flex-row">
+      <!-- แสดงรูปภาพ -->
+      <div class="md:w-1/2 p-4">
+        <div class="flex justify-center">
+          <img *ngIf="ImageList.length > 0" [src]="ImageList[0].value" alt="product" class="w-full min-h-[250px] max-h-[500px]  object-cover rounded-lg" />
+        </div>
+        <div class="flex justify-center mt-4 space-x-2">
+          <ng-container *ngIf="ImageList.length > 1">
+            <img *ngFor="let img of ImageList.slice(1)" [src]="img.value" alt="product-thumbnail" class="w-16 h-16 object-cover border border-gray-600 rounded-lg" />
+          </ng-container>
+        </div>
+      </div>
+
+      <!-- แสดงรายละเอียดของสินค้าเด้อ -->
+      <div class="md:w-1/2 p-4">
+        <h2 class="text-2xl font-bold mb-4">{{ product?.productName }}</h2>
+        <p class="text-lg mb-4">{{ product?.productDesc }}</p>
+        <div class="flex items-center mb-4">
+          <span class="font-bold text-lg text-gray-400">Price:</span>
+          <span class="font-bold text-lg ml-2">{{ product?.productPrice }}</span>
+        </div>
+        <div class="flex items-center mb-4">
+          <span class="font-bold text-lg text-gray-400">Stock:</span>
+          <span class="font-bold text-lg ml-2">{{ product?.productStock }}</span>
+        </div>
+        <div class="flex items-center mb-4">
+          <span class="font-bold text-lg text-gray-400">Category:</span>
+          <span class="font-bold text-lg ml-2">{{ productTypeName }}</span>
+        </div>
+        <div class="flex items-center mb-4">
+          <span class="font-bold text-lg text-gray-400">Quantity:</span>
+          <button (click)="decreaseQuantity()" class="bg-gray-600 text-white px-2 py-1 rounded-l">-</button>
+          <input type="number" [(ngModel)]="quantity" class="w-12 text-center" readonly />
+          <button (click)="increaseQuantity()" class="bg-gray-600 text-white px-2 py-1 rounded-r">+</button>
+        </div>
+        <button (click)="addToCart(product)" class="bg-blue-500 text-white px-4 py-2 rounded">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ม่องแสดงของอืนๆ เผื่อสนใจ -->
+  <div class="related-products mt-8 border-t-4 border-gray-600">
+    <h2 class="text-2xl font-bold mb-4 text-white">สินค้าอืนๆ</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
+      <div *ngFor="let relatedProduct of relatedProducts" (click)="viewProductDetail(relatedProduct.productId)"
+        class="card card-compact bg-gray-800 shadow-xl cursor-pointer transition-transform transform hover:scale-105">
+        <figure>
+          <img *ngIf="relatedProduct.imgList.length > 0" [src]="relatedProduct.imgList[0].value" alt="related-product"
+            class="w-full h-64 object-cover rounded-t-lg sm:rounded-lg" />
+        </figure>
+        <div class="flex justify-center mt-2 space-x-2">
+          <ng-container *ngIf="relatedProduct.imgList.length > 1">
+            <img *ngFor="let img of relatedProduct.imgList.slice(1, 4)" [src]="img.value" alt="related-product-thumbnail"
+              class="w-16 h-16 object-cover border border-gray-300 rounded-md" />
+          </ng-container>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title text-white">{{ relatedProduct.productName }}</h2>
+          <p class="font-bold text-white">{{ relatedProduct.productDesc }}</p>
+          <p class="font-bold text-white">Stock: {{ relatedProduct.productStock }}</p>
+          <p class="font-bold text-white">Price: {{ relatedProduct.productPrice }}</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" (click)="addRelateToCart(relatedProduct, $event)">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="product-detail-container min-h-screen" *ngIf="product">
   <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden text-white">
     <div class="flex flex-col md:flex-row">
-      <!-- Product Images Section -->
+
       <div class="md:w-1/2 p-4">
         <div class="flex justify-center">
           <img *ngIf="ImageList.length > 0" [src]="ImageList[0].value" alt="product" class="w-full h-64 object-cover rounded-lg" />
@@ -12,8 +91,8 @@
           </ng-container>
         </div>
       </div>
-      
-      <!-- Product Details Section -->
+
+
       <div class="md:w-1/2 p-4">
         <h2 class="text-2xl font-bold mb-4">{{ product?.productName }}</h2>
         <p class="text-lg mb-4">{{ product?.productDesc }}</p>
@@ -42,5 +121,23 @@
     </div>
   </div>
 
-  
-</div>
+
+  <div class="mt-8">
+    <h2 class="text-2xl font-bold mb-4">Related Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div *ngFor="let product of relatedProducts" (click)="OnGetProductById(product.productId)"
+        class="card card-compact bg-base-100 shadow-xl cursor-pointer transition-transform transform hover:scale-105">
+        <figure>
+          <img *ngIf="product.imgList.length > 0" [src]="product.imgList[0]" alt="product" class="w-full h-48 object-cover rounded-lg">
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{ product.productName }}</h2>
+          <p>{{ product.productDesc }}</p>
+          <div class="card-actions justify-end">
+            <span class="font-bold">{{ product.productPrice }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

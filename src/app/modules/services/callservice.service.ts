@@ -190,4 +190,41 @@ export class CallserviceService {
       API_ENDPOINT.concat('/order/getOrdersByUserId/' + userDetailId)
     );
   }
+
+  saveOrderImage(formData: FormData, orderId: any): Observable<any> {
+    return this.http.post<any>(
+      API_ENDPOINT.concat('/order/saveOrderImg/' + orderId),
+      formData
+    );
+  }
+
+  deleteOrderImage(fileName: any): Observable<any> {
+    return this.http.delete(
+      API_ENDPOINT.concat('/order/deleteOrderImgByFileName?fileName=' + fileName)
+    );
+  }
+
+  getBlobOrderThumbnail(fileName: string): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    return this.http.get<Blob>(
+      API_ENDPOINT.concat('/order/getImageByte?fileName=' + fileName),
+      { headers: headers, responseType: 'blob' as 'json' }
+    );
+  }
+
+  getOrderImageByte(fileName: string): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    });
+    return this.http.get<Blob>(
+      API_ENDPOINT.concat('/order/getImageByte?fileName=' + fileName),
+      { headers: headers, responseType: 'blob' as 'json' }
+    );
+  }
+
+
 }

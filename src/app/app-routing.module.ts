@@ -20,6 +20,7 @@ import { CreateOrderComponent } from './modules/createOrder/createOrder.componen
 import { OrderDetailAdminComponent } from './modules/orderDetailAdmin/orderDetailAdmin.component';
 import { OrderUserComponent } from './modules/orderUser/orderUser.component';
 import { OrderDetailUserComponent } from './modules/orderDetailUser/orderDetailUser.component';
+import { PaymentComponent } from './modules/payment/payment.component';
 
 
 const routes: Routes = [
@@ -84,8 +85,8 @@ const routes: Routes = [
       path: 'orderDetailUser/:orderId',
       component: OrderDetailUserComponent
     },{
-      path: 'orderDetailUser/:orderId',
-      component: OrderDetailUserComponent
+      path: 'payment/:orderId',
+      component: PaymentComponent
     }
   ]
   }

@@ -51,10 +51,10 @@ export class ProductComponent implements OnInit {
       const data = this.productForm.value
       this.callService.saveProduct(data).subscribe(res=>{
         if(res.data){
-  
+
           for(const file of this.selectedFiles[0]){
             const formData = new FormData();
-            formData.append('file', file); 
+            formData.append('file', file);
             this.callService.saveImage(formData, res.data).subscribe(res=>{
               console.log("saveImage=>" , res.data)
             })
@@ -70,7 +70,7 @@ export class ProductComponent implements OnInit {
                 this.router.navigate(['/manage-product']);
               }
             })
-            
+
           }else{
             Swal.fire({
               icon: 'warning',
@@ -82,7 +82,7 @@ export class ProductComponent implements OnInit {
         }
       })
     }
-    
+
   }
   onFileChanged(event: any) {
     this.selectedFiles.push(event.target.files);
