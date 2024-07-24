@@ -7,7 +7,6 @@
         <p>Order ID: {{ order.orderId }}</p>
         <p>User ID: {{ order.userDetailId }}</p>
         <p>Total Amount: {{ order.totalAmount | currency }}</p>
-        <!-- Add other details if needed -->
       </div>
 
       <div class="text-center mt-6">
@@ -18,12 +17,24 @@
         </div>
       </div>
 
-      <!-- Add your payment form or button here -->
+      <div class="mt-6">
+        <h3 class="text-xl font-semibold mb-2">Upload Payment Proof</h3>
+        <input type="file" (change)="onFileChanged($event)" multiple>
+      </div>
+
+      <div class="mt-4 grid grid-cols-2 gap-4">
+        <div *ngFor="let img of ImageList">
+          <img [src]="img.value" alt="Uploaded Image" class="w-32 h-32 object-cover"/>
+          <button (click)="onDeleteFileChanged(img.key)" class="text-red-500 mt-2">Delete</button>
+        </div>
+      </div>
+
       <div class="text-center mt-6">
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <button (click)="confirmPayment()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
           Confirm Payment
         </button>
       </div>
+
     </div>
   </div>
 </div>

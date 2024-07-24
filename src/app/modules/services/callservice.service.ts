@@ -226,5 +226,13 @@ export class CallserviceService {
     );
   }
 
+  updateOrder(orderId: number, updatedOrder: any): Observable<any> {
+    return this.http.put(
+      API_ENDPOINT.concat('/order/updateOrder/' + orderId),
+      updatedOrder,
+      httpOptions
+    );
+  }
+
 
 }
