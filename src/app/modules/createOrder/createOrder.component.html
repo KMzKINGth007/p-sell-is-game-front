@@ -12,12 +12,7 @@
       <h3 class="text-xl font-semibold">Payment Method</h3>
       <div>
         <label>
-          <input type="radio" name="paymentMethod" value="1" [(ngModel)]="selectedPaymentMethod"> Credit Card
-        </label>
-      </div>
-      <div>
-        <label>
-          <input type="radio" name="paymentMethod" value="2" [(ngModel)]="selectedPaymentMethod"> PayPal
+          <input type="radio" name="paymentMethod" value="1" [(ngModel)]="selectedPaymentMethod"> promptpay
         </label>
       </div>
     </div>
@@ -30,7 +25,7 @@
           <p>{{ item.productDesc }}</p>
           <p>Price: {{ item.productPrice | currency }}</p>
           <p>Quantity: {{ item.quantity }}</p>
-          <p>Total: {{ (item.productPrice * item.quantity) | currency }}</p>
+          <p>Total: {{ (item.productPrice * item.quantity) }} บาท</p>
         </div>
       </div>
     </div>

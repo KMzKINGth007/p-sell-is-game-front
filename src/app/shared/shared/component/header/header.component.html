@@ -14,7 +14,7 @@
         <li *ngIf="null != userDetail && userDetail.roleId == 1"><a [routerLink]="['/manage-user']" routerLinkActive="router-link-active"  class="nav-link px-2 text-white">จัดการลูกค้า</a></li>
         <li *ngIf="null != userDetail && userDetail.roleId == 1"><a [routerLink]="['/manage-product']" class="nav-link px-2 text-white">จัดการสินค้า</a></li>
         <li *ngIf="null != userDetail && userDetail.roleId == 1"><a [routerLink]="['/order-admin']" class="nav-link px-2 text-white">ออเดอร์</a></li>
-        <li *ngIf="null != userDetail && userDetail.roleId == 1"><a href="#" class="nav-link px-2 text-white" [routerLink]="['/report']">รายงาน</a></li>
+        <!-- <li *ngIf="null != userDetail && userDetail.roleId == 1"><a href="#" class="nav-link px-2 text-white" [routerLink]="['/report']">รายงาน</a></li> -->
       </ul>
 
       <div class="text-end" *ngIf="null == userDetail">

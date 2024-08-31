@@ -8,6 +8,12 @@
           </div>
         </div>
         <div class="card-body px-0 pb-2">
+          <div class="d-flex justify-content-start mb-3">
+            <button class="btn btn-primary me-2" (click)="applyFilter('all')">All Orders</button>
+            <button class="btn btn-secondary me-2" (click)="applyFilter('unpaid')">Unpaid Orders</button>
+            <button class="btn btn-warning me-2" (click)="applyFilter('checking')">Checking Orders</button>
+            <button class="btn btn-success" (click)="applyFilter('paid')">Paid Orders</button>
+          </div>
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
@@ -22,7 +28,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let order of orders">
+                <tr *ngFor="let order of filteredOrders" [ngClass]="{
+                  'bg-gray-100': order.status === 'unpaid',
+                  'bg-yellow-100': order.status === 'checking',
+                  'bg-green-100': order.status === 'paid'
+                }">
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{ order.orderId }}</span>
                   </td>
@@ -41,10 +51,13 @@
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{ order.status }}</span>
                   </td>
-                  <td class="align-middle text-center">
-                    <button class="btn btn-primary" (click)="viewOrder(order)">View</button>
-                    <button class="btn btn-danger" (click)="deleteOrder(order.orderId)">Delete</button>
-                  </td>
+                  <!-- Add a button to navigate to the SendMailComponent -->
+<td class="align-middle text-center">
+  <button class="btn btn-primary" (click)="viewOrder(order)">View</button>
+  <button class="btn btn-danger" (click)="deleteOrder(order.orderId)">Delete</button>
+  <button class="btn btn-info" (click)="sendMail(order.orderId)">Send Mail</button> <!-- New button -->
+</td>
+
                 </tr>
               </tbody>
             </table>

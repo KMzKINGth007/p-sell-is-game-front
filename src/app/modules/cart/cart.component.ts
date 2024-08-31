@@ -50,11 +50,12 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(product: any, change: number) {
-    product.quantity += change;
-    if (product.quantity <= 0) {
-      this.confirmRemove(product);
-    } else {
+    const newQuantity = product.quantity + change;
+    if (newQuantity > 0) {
+      product.quantity = newQuantity;
       this.updateCart();
+    } else if (newQuantity === 0) {
+      this.confirmRemove(product);
     }
   }
 

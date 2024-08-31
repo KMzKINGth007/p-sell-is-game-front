@@ -27,6 +27,8 @@ import { OrderUserComponent } from 'src/app/modules/orderUser/orderUser.componen
 import { OrderDetailUserComponent } from 'src/app/modules/orderDetailUser/orderDetailUser.component';
 import { PaymentComponent } from 'src/app/modules/payment/payment.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { SandmailComponent } from 'src/app/modules/sandmail/sandmail.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   imports: [
@@ -38,7 +40,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     NgxPermissionsModule.forRoot(),
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-    QRCodeModule
+    QRCodeModule,
+    NgxChartsModule
   ],
   declarations: [
     FullwidthComponent,
@@ -60,7 +63,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     OrderDetailAdminComponent,
     OrderUserComponent,
     OrderDetailUserComponent,
-    PaymentComponent
+    PaymentComponent,
+    SandmailComponent
   ]
 })
 export class FullwidthModule { }

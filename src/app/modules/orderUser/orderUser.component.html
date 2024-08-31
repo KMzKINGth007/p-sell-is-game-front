@@ -2,12 +2,39 @@
   <div class="container mx-auto bg-black bg-opacity-70 rounded-lg shadow-lg p-6">
     <h1 class="text-3xl font-extrabold mb-6">My Orders</h1>
 
-    <div *ngIf="orders.length === 0" class="text-center text-gray-400">
+    <div class="flex space-x-4 mb-6">
+      <button
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+        (click)="applyFilter('all')"
+      >
+        All Orders
+      </button>
+      <button
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+        (click)="applyFilter('unpaid')"
+      >
+        Unpaid Orders
+      </button>
+      <button
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+        (click)="applyFilter('checking')"
+      >
+        Checking Orders
+      </button>
+      <button
+        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600"
+        (click)="applyFilter('paid')"
+      >
+        Paid Orders
+      </button>
+    </div>
+
+    <div *ngIf="filteredOrders.length === 0" class="text-center text-gray-400">
       No orders found.
     </div>
 
-    <div *ngIf="orders.length > 0" class="space-y-4">
-      <div *ngFor="let order of orders" class="bg-gray-800 shadow-md rounded-lg p-4 border border-gray-700">
+    <div *ngIf="filteredOrders.length > 0" class="space-y-4">
+      <div *ngFor="let order of filteredOrders" class="bg-gray-800 shadow-md rounded-lg p-4 border border-gray-700">
         <div class="flex justify-between items-center">
           <div>
             <h2 class="text-xl font-semibold mb-2">Order #{{ order.orderId }}</h2>
@@ -16,14 +43,14 @@
             <p class="text-gray-300">Status: {{ order.status }}</p>
           </div>
           <div class="flex space-x-2">
-            <button 
-              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" 
+            <button
+              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               (click)="viewOrder(order)"
             >
               View Details
             </button>
-            <button 
-              class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700" 
+            <button
+              class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
               (click)="deleteOrder(order.orderId)"
             >
               Delete

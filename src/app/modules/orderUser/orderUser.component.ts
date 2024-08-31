@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class OrderUserComponent implements OnInit {
   orders: any[] = [];
+  filteredOrders: any[] = [];
+  currentFilter: string = 'all';
 
   constructor(
     private callService: CallserviceService,
@@ -25,12 +27,10 @@ export class OrderUserComponent implements OnInit {
       const userDetail = JSON.parse(userDetailString);
       const userDetailId = userDetail.userDetailId;
 
-      console.log(userDetail.userDetailId);
-
       this.callService.getOrdersByUserId(userDetailId).subscribe(
         (response) => {
           this.orders = response.data || response;
-          console.log(this.orders);
+          this.applyFilter(this.currentFilter);
         },
         (error) => {
           console.error('Failed to fetch orders:', error);
@@ -38,6 +38,15 @@ export class OrderUserComponent implements OnInit {
       );
     } else {
       console.error('User detail not found in session storage');
+    }
+  }
+
+  applyFilter(status: string) {
+    this.currentFilter = status;
+    if (status === 'all') {
+      this.filteredOrders = this.orders;
+    } else {
+      this.filteredOrders = this.orders.filter(order => order.status === status);
     }
   }
 

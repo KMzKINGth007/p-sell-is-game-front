@@ -204,15 +204,10 @@ export class CallserviceService {
     );
   }
 
-  getBlobOrderThumbnail(fileName: string): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    });
-    return this.http.get<Blob>(
-      API_ENDPOINT.concat('/order/getImageByte?fileName=' + fileName),
-      { headers: headers, responseType: 'blob' as 'json' }
-    );
+
+
+  getOrderImgByOrderId(orderId: number): Observable<any> {
+    return this.http.get<any>(`${API_ENDPOINT}/order/getOrderImgByOrderId?orderId=${orderId}`);
   }
 
   getOrderImageByte(fileName: string): Observable<Blob> {
@@ -225,6 +220,8 @@ export class CallserviceService {
       { headers: headers, responseType: 'blob' as 'json' }
     );
   }
+
+
 
   updateOrder(orderId: number, updatedOrder: any): Observable<any> {
     return this.http.put(

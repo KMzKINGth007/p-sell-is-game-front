@@ -29,10 +29,10 @@ export class ProfileEditComponent implements OnInit {
     lastName: '',
     phone: '',
     age: '',
-    roleId: '',
-    userName: '',
     email: '',
     line: '',
+    roleId: '',
+    userName: ''
   });
 
   ngOnInit() {
@@ -61,6 +61,8 @@ export class ProfileEditComponent implements OnInit {
       lastName: data.lastName,
       phone: data.phone,
       age: data.age,
+      email: data.email,
+      line: data.line,
       roleId: data.roleId,
       userName: data.userName,
     });
@@ -91,10 +93,10 @@ export class ProfileEditComponent implements OnInit {
           });
 
           if (this.userId) {
-            this.router.navigate(['/profile/' + this.userId]);
+            this.router.navigate(['/manage-user']);
           } else {
             this.getUserById(res.data);
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/manage-user']);
           }
         } else {
           Swal.fire({

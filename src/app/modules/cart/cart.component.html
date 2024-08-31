@@ -13,7 +13,7 @@
             <p class="text-gray-300">{{ item.productDesc }}</p>
           </div>
           <div>
-            <p class="text-gray-300">Price: {{ item.productPrice | currency }}</p>
+            <p class="text-gray-300">Price: {{ item.productPrice}} บาท</p>
           </div>
           <div class="flex items-center">
             <button (click)="updateQuantity(item, -1)" class="btn btn-secondary">-</button>
@@ -21,7 +21,7 @@
             <button (click)="updateQuantity(item, 1)" class="btn btn-secondary">+</button>
           </div>
           <div>
-            <p class="text-gray-300">Total: {{ (item.productPrice * item.quantity) | currency }}</p>
+            <p class="text-gray-300">Total: {{ (item.productPrice * item.quantity) }} บาท</p>
           </div>
           <div>
             <button (click)="confirmRemove(item)" class="btn btn-error">Remove</button>

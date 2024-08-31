@@ -47,7 +47,7 @@
           <h2 class="card-title text-white">{{ product.productName }}</h2>
           <p class="font-bold text-white">{{ product.productDesc }}</p>
           <p class="font-bold text-white">ราคา: {{ product.productPrice }}</p>
-          <p class="font-bold text-white">จำนวน: {{ product.productStock }}</p>
+          <p class="font-bold text-white">จำนวน: {{ product.productStock }} บาท</p>
           <p class="font-bold text-white">ประเภท: {{ product.productType[0]?.productTypeName }}</p>
           <div class="card-actions justify-end">
             <button class="btn btn-primary" (click)="addToCart(product, $event)">Buy Now</button>

@@ -21,6 +21,7 @@ import { OrderDetailAdminComponent } from './modules/orderDetailAdmin/orderDetai
 import { OrderUserComponent } from './modules/orderUser/orderUser.component';
 import { OrderDetailUserComponent } from './modules/orderDetailUser/orderDetailUser.component';
 import { PaymentComponent } from './modules/payment/payment.component';
+import { SandmailComponent } from './modules/sandmail/sandmail.component';
 
 
 const routes: Routes = [
@@ -87,6 +88,9 @@ const routes: Routes = [
     },{
       path: 'payment/:orderId',
       component: PaymentComponent
+    },{
+      path: 'sendmail/:orderId',
+      component: SandmailComponent
     }
   ]
   }

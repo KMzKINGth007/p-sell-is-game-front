@@ -14,10 +14,11 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">#</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">userName</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">FirstName</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">LastName</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">email</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Age</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
                   </tr>
@@ -30,6 +31,9 @@
                       </div>
                     </td>
                     <td class="align-middle text-center">
+                      <p class="text-xs font-weight-bold mb-0">{{item.userName}}</p>
+                    </td>
+                    <td class="align-middle text-center">
                       <p class="text-xs font-weight-bold mb-0">{{item.firstName}}</p>
                     </td>
                     <td class="align-middle text-center">
@@ -39,7 +43,7 @@
                       <span class="badge badge-sm bg-gradient-success">{{item.status}}</span>
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">{{item.phone}}</span>
+                      <span class="text-secondary text-xs font-weight-bold">{{item.email}}</span>
                     </td>
                     <td class="align-middle text-center">
                       <span class="text-secondary text-xs font-weight-bold">{{item.age}}</span>
